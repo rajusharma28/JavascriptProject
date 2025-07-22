@@ -1,0 +1,165 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* App Container */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #153577, #4e085f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* To-do Box */
+.TodoList {
+  width: 100%;
+  max-width: 540px;
+  background: #fff;
+  padding: 40px 30px 70px;
+  margin: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.TodoList h2 {
+  color: #002765;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.TodoList h2 img {
+  width: 30px;
+  margin-left: 10px;
+}
+
+/* Input Row */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edeef0;
+  border-radius: 30px;
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+  font-size: 14px;
+}
+
+button {
+  border: none;
+  outline: none;
+  padding: 16px 50px;
+  background: #ff5945;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #e34a36;
+}
+
+/* Task List */
+ul {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+ul li {
+  position: relative;
+  background-color: #f8f9fa;
+  padding: 15px 50px 15px 60px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-left: 6px solid #ff5945;
+  border-radius: 8px;
+  list-style: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease;
+}
+
+ul li:hover {
+  background-color: #e9ecef;
+  transform: translateX(5px);
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/1828/1828817.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+}
+
+/* Checked Task */
+li.checked {
+  color: #777;
+  text-decoration: line-through;
+  background-color: #dcdcdc;
+  border-left-color: #888;
+}
+
+li.checked::before {
+  opacity: 1;
+  filter: grayscale(100%);
+}
+
+/* Delete Button */
+ul li span {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 20px;
+  color: #ff5945;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  border-radius: 50%;
+}
+
+ul li span:hover {
+  background-color: #ffe2de;
+  transform: scale(1.2);
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
