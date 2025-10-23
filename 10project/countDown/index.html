@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown</title>
+</head>
+
+<style>
+   
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#parent {
+   
+    padding: 40px 60px;
+    border-radius: 20px;
+   
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    transform: scale(1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border: 1px solid rgba(0, 255, 240, 0.3);
+}
+
+
+
+h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    color: #00ffff;
+   
+    
+}
+
+#result {
+    font-family: 'Orbitron', monospace;
+    font-size: 3.5rem;
+   
+    padding: 25px 30px;
+    border-radius: 15px;
+  
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 120px;
+    line-height: 1.2;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; margin-bottom: 30px; }
+    #result { font-size: 2.5rem; padding: 20px 25px; min-height: 100px; gap: 10px; }
+    #result span { min-width: 60px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.6rem; margin-bottom: 25px; letter-spacing: 1px; }
+    #result { font-size: 1.8rem; padding: 15px 15px; min-height: 80px; gap: 8px; letter-spacing: 1px; }
+    #result span { min-width: 45px; }
+}
+
+</style>
+
+<body>
+    <div id="parent">
+        <h1>Olypic CountDown timer</h1>
+        <div id="result">
+
+        </div>
+    </div>
+
+    <script>
+        const result = document.getElementById("result");
+        const olympicDate = new Date(2028, 6, 14).getTime();
+
+        function updateCountdown() {
+            const now = Date.now();
+            let timer = olympicDate - now;
+
+            if (timer <= 0) {
+                result.textContent = "The Olympics have started!";
+                clearInterval(interval);
+                return;
+            }
+
+            const day = Math.floor(timer / (1000 * 60 * 60 * 24));
+            timer %= (1000 * 60 * 60 * 24);
+
+            const hour = Math.floor(timer / (1000 * 60 * 60));
+            timer %= (1000 * 60 * 60);
+
+            const minute = Math.floor(timer / (1000 * 60));
+            timer %= (1000 * 60);
+
+            const second = Math.floor(timer / 1000);
+
+            result.textContent = `${day} day : ${hour} hour : ${minute} minute : ${second} second`;
+        }
+
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
+
+
+    </script>
+</body>
+
+</html>

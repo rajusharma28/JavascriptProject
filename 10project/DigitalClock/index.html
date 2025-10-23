@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+        }
+
+        #time {
+            font-size: 4rem;
+            padding: 30px 50px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        #time:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+        }
+
+        @media(max-width: 600px){
+            #time {
+                font-size: 3rem;
+                padding: 20px 35px;
+            }
+        }
+
+        @media(max-width: 400px){
+            #time {
+                font-size: 2.2rem;
+                padding: 15px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="time"></div>
+
+    <script>
+        const div = document.getElementById("time");
+        setInterval(()=>{
+            let time = new Date();
+            div.textContent = time.toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>

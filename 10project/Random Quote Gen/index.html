@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Quote Generator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+    body {
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      color: #ecf0f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: "Montserrat", sans-serif;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    #first {
+      max-width: 700px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    #first:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    #quote {
+      font-size: 1.9rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+      font-weight: 600;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      animation: slideInUp 0.7s ease-out forwards;
+      position: relative;
+    }
+
+    #quote::before,
+    #quote::after {
+      content: '“';
+      font-size: 3rem;
+      position: absolute;
+      top: -10px;
+      left: -20px;
+      color: rgba(255, 255, 255, 0.2);
+      line-height: 1;
+      z-index: -1;
+      transform: rotate(180deg);
+    }
+
+    #quote::after {
+      content: '”';
+      left: auto;
+      right: -20px;
+      top: auto;
+      bottom: -10px;
+      transform: rotate(0deg);
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 17px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #1abc9c, #16a085);
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+      outline: none;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #16a085, #1abc9c);
+      box-shadow: 0 6px 20px rgba(26, 188, 156, 0.6);
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(26, 188, 156, 0.3);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #first {
+        margin: 15px;
+        padding: 30px;
+      }
+      #quote {
+        font-size: 1.4rem;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 15px;
+      }
+      #quote::before,
+      #quote::after {
+        font-size: 2.5rem;
+        top: -5px;
+        left: -15px;
+        right: -15px;
+        bottom: -5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #first {
+        padding: 25px;
+        border-radius: 10px;
+      }
+      #quote {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 9px 18px;
+        font-size: 14px;
+      }
+      #quote::before,
+      #quote::after {
+        font-size: 2rem;
+        top: -2px;
+        left: -10px;
+        right: -10px;
+        bottom: -2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="first">
+    <h1 id="quote">Honesty is the best policy</h1>
+    <button>Generate Random Quote</button>
+  </div>
+
+  <script>
+    const arr = [
+      "Believe in yourself and all that you are.",
+      "Every day is a second chance.",
+      "Dream big and dare to fail.",
+      "Success doesn’t come to you; you go to it.",
+      "Difficult roads often lead to beautiful destinations.",
+      "Be a voice, not an echo.",
+      "Happiness is not by chance, but by choice.",
+      "Don’t stop until you’re proud.",
+      "The best time for new beginnings is now.",
+      "Push yourself because no one else is going to do it for you.",
+      "Your only limit is your mind.",
+      "Start where you are. Use what you have. Do what you can.",
+      "Great things never come from comfort zones.",
+      "Work hard in silence, let success make the noise.",
+      "Believe you can and you’re halfway there.",
+      "Don’t watch the clock; do what it does — keep going.",
+      "Make today so awesome that yesterday gets jealous.",
+      "You are stronger than you think.",
+      "Act as if what you do makes a difference — it does.",
+      "Keep your face always toward the sunshine, and shadows will fall behind you."
+    ];
+
+    const button = document.querySelector("button");
+    const quote = document.getElementById("quote");
+
+    button.addEventListener("click", () => {
+      const index = Math.floor(Math.random() * arr.length);
+      quote.textContent = arr[index];
+      quote.style.animation = "none";
+      quote.offsetHeight;
+      quote.style.animation = "slideInUp 0.6s ease-in-out";
+    });
+  </script>
+</body>
+</html>

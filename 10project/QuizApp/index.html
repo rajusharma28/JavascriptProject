@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.question p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1em;
+    color: #666;
+    cursor: pointer;
+}
+
+.question input[type="radio"] {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
+
+#out {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #d62828; /* Red for incorrect answers, can be changed */
+}
+    </style>
+</head>
+<body>
+     <div class="container">
+        <h1>Cricket Quiz</h1>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. Who has the most centuries in international cricket?</p>
+                <label>
+                    <input type="radio" name="q1" value="Sachin Tendulkar"> Sachin Tendulkar
+                </label><br>
+                <label>
+                    <input type="radio" name="q1" value="Virat Kohli"> Virat Kohli
+                </label><br>
+                <label>
+                    <input type="radio" name="q1" value="Ricky Ponting"> Ricky Ponting
+                </label><br>
+                <label>
+                    <input type="radio" name="q1" value="Jacques Kallis"> Jacques Kallis
+                </label><br>
+            </div>
+            <div class="question">
+                <p>2. Which country won the first ICC Cricket World Cup?</p>
+                <label>
+                    <input type="radio" name="q2" value="Australia"> Australia
+                </label><br>
+                <label>
+                    <input type="radio" name="q2" value="England"> England
+                </label><br>
+                <label>
+                    <input type="radio" name="q2" value="West Indies"> West Indies
+                </label><br>
+                <label>
+                    <input type="radio" name="q2" value="India"> India
+                </label><br>
+            </div>
+            <div class="question">
+                <p>3. Who is known as the 'God of Cricket'?</p>
+                <label>
+                    <input type="radio" name="q3" value="Virat Kohli"> Virat Kohli
+                </label><br>
+                <label>
+                    <input type="radio" name="q3" value="Don Bradman"> Don Bradman
+                </label><br>
+                <label>
+                    <input type="radio" name="q3" value="MS Dhoni"> MS Dhoni
+                </label><br>
+                <label>
+                    <input type="radio" name="q3" value="Sachin Tendulkar"> Sachin Tendulkar
+                </label><br>
+            </div>
+            <div class="question">
+                <p>4. What is the highest individual score in ODI cricket?</p>
+                <label>
+                    <input type="radio" name="q4" value="264"> 264
+                </label><br>
+                <label>
+                    <input type="radio" name="q4" value="200"> 200
+                </label><br>
+                <label>
+                    <input type="radio" name="q4" value="237"> 237
+                </label><br>
+                <label>
+                    <input type="radio" name="q4" value="275"> 275
+                </label><br>
+            </div>
+            <div class="question">
+                <p>5. Which bowler has taken the most wickets in Test cricket?</p>
+                <label>
+                    <input type="radio" name="q5" value="Muttiah Muralitharan"> Muttiah Muralitharan
+                </label><br>
+                <label>
+                    <input type="radio" name="q5" value="Shane Warne"> Shane Warne
+                </label><br>
+                <label>
+                    <input type="radio" name="q5" value="James Anderson"> James Anderson
+                </label><br>
+                <label>
+                    <input type="radio" name="q5" value="Anil Kumble"> Anil Kumble
+                </label><br>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div class="result" id="result"></div>
+        <div id="out"></div>
+    </div>
+</body>
+<script>
+    const form = document.querySelector('form');
+const answer= {
+    q1: "Sachin Tendulkar",
+    q2: "West Indies",
+    q3: "Sachin Tendulkar",
+    q4: "264",
+    q5: "Muttiah Muralitharan"
+}
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    const data = new FormData(form);
+    let finalScore = 0;
+
+
+    for(let [name,value] of data.entries()){
+        if(answer[name]==value)
+            finalScore++;
+    }
+    
+
+    document.getElementById("out").textContent = `Your score is ${finalScore} out of 5`
+    
+    form.reset();
+
+})
+
+</script>
+</html>

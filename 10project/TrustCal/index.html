@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trust Calculator</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1d502f, #0f6e9e);
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    box-sizing: border-box;
+}
+
+#parent {
+    background: #ffffff;
+    padding: 35px 45px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    transform: translateY(0);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+#parent:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    text-shadow: none;
+    letter-spacing: 0.2px;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fdfdfd;
+    color: #333;
+    font-size: 0.95rem;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #8fd3f4;
+    box-shadow: 0 0 0 3px rgba(143, 211, 244, 0.3);
+}
+
+br {
+    display: none;
+}
+
+button[type="submit"] {
+    background: linear-gradient(45deg, #6dd5ed, #2193b0);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(33, 147, 176, 0.2);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    width: 100%;
+    outline: none;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    box-shadow: 0 5px 15px rgba(33, 147, 176, 0.3);
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(33, 147, 176, 0.2);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    color: #2c3e50;
+    text-shadow: none;
+    font-weight: 700;
+    min-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    #parent {
+        padding: 25px 35px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+        padding: 9px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    #parent {
+        padding: 20px 25px;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+    }
+
+    label {
+        font-size: 0.85rem;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    button[type="submit"] {
+        padding: 9px 18px;
+        font-size: 0.85rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        margin-top: 20px;
+    }
+}
+
+</style>
+<body>
+
+  
+  <div id="parent">
+    <h1>Trust Calculator</h1>
+
+    <form>
+      <label for="boy">Boy's Name:</label>
+      <input type="text" id="boy" name="boy" required>
+      <br><br>
+
+      <label for="girl">Girl's Name:</label>
+      <input type="text" id="girl" name="girl" required>
+      <br><br>
+
+      <button type="submit">Calculate</button>
+      <br><br>
+    </form>
+
+    <h2>Result:</h2>
+  </div>
+
+  <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // stop page reload
+
+      const boy = document.getElementById('boy').value.trim();
+      const girl = document.getElementById('girl').value.trim();
+
+      const l1 = boy.length;
+      const l2 = girl.length;
+
+      const result = Math.pow(l1 + l2, 3) % 101;
+
+      document.querySelector('h2').textContent = `Result: ${result}% Trust`;
+    });
+  </script>
+</body>
+</html>
